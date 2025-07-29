@@ -30,6 +30,10 @@ Powered by Ansible 2.18.6, pre-loaded with common community collections and winr
 ```bash
 docker run --rm -v $(pwd):/app -w /app prplanit/ansible:2.18.6 ansible-playbook playbook.yaml
 ```
+advanced example:
+```
+docker run -v ./playbook.yaml:/root/playbook.yaml -v /srv/gitops/ad-arbitorium-private:/srv/gitops/ad-arbitorium-private -v ~/.ssh/id_rsa:/root/.ssh/id_rsa --rm cr.pcfae.com/prplanit/ansible:2.18.6 ansible-playbook --private-key /root/.ssh/id_rsa -i /srv/gitops/ad-arbitorium-private/ansible/inventory /root/playbook.yaml -e ansible_windows_password=$WINDOWS_ANSIBLE_PASSWORD
+```
 
 ### 📦 Use in GitLab CI/CD
 
