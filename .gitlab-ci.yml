@@ -131,6 +131,12 @@ generate_release_notes:
   only:
     - tags
   script: |
+    echo "Listing project files..."
+    find . -type f
+    echo "Checking for CRLF endings..."
+    file ./scripts/release-notes.sh || true
+    cat -A ./scripts/release-notes.sh || true  # Show line endings
+
     echo "Generating release notes for $DOCKER_HUB_USERNAME/$CI_PROJECT_NAME:$CI_COMMIT_TAG..."
     apk add --no-cache bash curl git                                                                                                                      >/dev/null
     ./scripts/release-notes.sh > release.md
