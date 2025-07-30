@@ -5,7 +5,13 @@ A lightweight, production-ready Ansible Docker Image built on `python:3.13.5-alp
 
 Powered by Ansible 2.18.6, pre-loaded with common community collections and winrm support for managing Windows nodes.
 
----
+## ⛓️‍💥 Links:
+- [Dockerhub](https://hub.docker.com/r/prplanit/ansible-oci): 
+  - Public Image Releases.
+- [GitLab](https://gitlab.prplanit.com/precisionplanit/ansible-oci):
+  - Official Source, up to date; but 100% uptime can not be guaranteed.
+- [Github](https://github.com/sofmeright/ansible-oci):
+  - Source is available, (This can get out of sync with Gitlab).
 
 ## 🚀 Image Features
 
@@ -21,18 +27,16 @@ Powered by Ansible 2.18.6, pre-loaded with common community collections and winr
   - `community.docker`
 - 🔐 Host key checking is disabled via `ANSIBLE_HOST_KEY_CHECKING=false` for smoother CI/CD use
 
----
+## ⚙️ Usage
 
-## 🧪 Usage
-
-### ✅ Run Locally
-
+### ▶️ Run Locally
+#### Basic Example:
 ```bash
-docker run --rm -v $(pwd):/app -w /app prplanit/ansible:2.18.6 ansible-playbook playbook.yaml
+docker run --rm -v $(pwd):/app -w /app prplanit/ansible-oci:latest ansible-playbook playbook.yaml
 ```
-advanced example:
+#### Advanced Example:
 ```
-docker run -v ./playbook.yaml:/root/playbook.yaml -v /srv/gitops/ad-arbitorium-private:/srv/gitops/ad-arbitorium-private -v ~/.ssh/id_rsa:/root/.ssh/id_rsa --rm cr.pcfae.com/prplanit/ansible:2.18.6 ansible-playbook --private-key /root/.ssh/id_rsa -i /srv/gitops/ad-arbitorium-private/ansible/inventory /root/playbook.yaml -e ansible_windows_password=$WINDOWS_ANSIBLE_PASSWORD
+docker run -v ./playbook.yaml:/root/playbook.yaml -v /srv/gitops/ad-arbitorium-private:/srv/gitops/ad-arbitorium-private -v ~/.ssh/id_rsa:/root/.ssh/id_rsa --rm prplanit/ansible-oci:latest ansible-playbook --private-key /root/.ssh/id_rsa -i /srv/gitops/ad-arbitorium-private/ansible/inventory /root/playbook.yaml -e ansible_windows_password=$WINDOWS_ANSIBLE_PASSWORD
 ```
 
 ### 📦 Use in GitLab CI/CD
@@ -40,7 +44,7 @@ docker run -v ./playbook.yaml:/root/playbook.yaml -v /srv/gitops/ad-arbitorium-p
 ```yaml
 ansible-deploy:
   stage: deploy
-  image: your-registry/ansible:2.18.6
+  image: prplanit/ansible-oci:latest
   script:
     - ansible-playbook ansible/deploy.yaml -i ansible/inventory
 ```
@@ -70,7 +74,7 @@ Example layout:
 - Keep in mind that pywinrm is included, but for full Windows management, you may need to pass additional credentials or certificates depending on your environment.
 - This image does not contain systemd or sshd—it's designed strictly as a control node for executing playbooks, not as a managed host.
 
-### 🧼 CMD Behavior
+### 🐚 CMD Behavior
 
 By default, the image runs:
 
@@ -80,18 +84,11 @@ ansible-playbook --version
 
 Override this by providing your own entrypoint or script.
 
-### 📌 Versions
-
-- Ansible: 2.18.6
-- ansible-lint: 25.6.1
-- Python: 3.13.5
-- Alpine: 3.22
-
-🔗 Contributing
+## 🫱🏽‍🫲🏽 Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you'd like to change.
 
-🧪 License
+## 🪪 License
 Use it freely, deploy wisely, and remember: automation is power, but also responsibility.
 
-🙅‍♂️ Disclaimer
+## ⚠️ Disclaimer
 > This image is provided as-is, without warranties, implied Ansible enlightenment, or protection from weekend-dev-ops rabbit holes. The author assumes no responsibility if your playbook summons demons or accidentally configures your microwave.
