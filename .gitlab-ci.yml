@@ -40,9 +40,6 @@ build-image:
       fi
   rules:
     - if: $CI_COMMIT_TAG
-  trigger:
-    # project: group/another-project
-    branch: main
 
 create-release:
   before_script:  |
@@ -117,9 +114,6 @@ create-release:
       exit 1
     fi
   stage: release
-  trigger:
-    # project: group/another-project
-    branch: main
 
 generate_release_notes:
   artifacts:
@@ -146,9 +140,6 @@ generate_release_notes:
       head -n 10 release.md  # Show first 10 lines
     fi
   stage: release
-  trigger:
-    # project: group/another-project
-    branch: main
 
 update-release-badge:
   stage: release
@@ -231,6 +222,3 @@ update-release-badge:
       artifacts: false
   only:
     - tags
-  trigger:
-    # project: group/another-project
-    branch: main
