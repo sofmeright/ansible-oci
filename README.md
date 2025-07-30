@@ -95,4 +95,3 @@ Use it freely, deploy wisely, and remember: automation is power, but also respon
 
 🙅‍♂️ Disclaimer
 > This image is provided as-is, without warranties, implied Ansible enlightenment, or protection from weekend-dev-ops rabbit holes. The author assumes no responsibility if your playbook summons demons or accidentally configures your microwave.
-
