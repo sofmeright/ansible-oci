@@ -1,5 +1,5 @@
 ![Latest Release](https://gitlab.prplanit.com/precisionplanit/ansible-oci/-/badges/release.svg) ![Latest Release Status](https://gitlab.prplanit.com/precisionplanit/ansible-oci/-/raw/main/assets/badge-release-status.svg) [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/T6T41IT163)
-# ![Ansible](https://gitlab.prplanit.com/uploads/-/system/project/avatar/21/Ansible_Logo.png?width=20) Ansible Docker (alpine base image)
+# ![Ansible](https://gitlab.prplanit.com/uploads/-/system/project/avatar/21/Ansible_Logo.png?width=20) Ansible OCI (Docker Image)
 
 A lightweight, production-ready Ansible image built on `python:3.13.5-alpine3.22` (plans to update as needed). This image was designed for running playbooks in CI/CD pipelines or local automation tasks.
 
