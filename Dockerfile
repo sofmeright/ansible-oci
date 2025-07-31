@@ -12,6 +12,7 @@ ENV ANSIBLE_HOST_KEY_CHECKING=False
 RUN apk add --no-cache \
     bash \
     curl \
+    git \
     openssh \
     openssh-keygen \
     rsync
