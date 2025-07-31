@@ -5,6 +5,24 @@ A lightweight, production-ready Ansible Docker Image built on `python:3.13.5-alp
 
 Powered by Ansible 2.18.6, pre-loaded with common community collections and winrm support for managing Windows nodes.
 
+## 🚀 Image Features
+
+- ✅ Based on **Python 3.13.5** + **Alpine 3.22** for minimal footprint
+- 🛠️ Includes:
+  - `ansible-core==2.18.6`
+  - `ansible-lint==25.6.1`
+  - `curl`
+  - `git`
+  - `openssh`
+  - `openssh-keygen`
+  - `pywinrm` for Windows management
+  - `rsync`
+- 📦 Pre-installed Ansible collections:
+  - `ansible.posix`
+  - `ansible.windows`
+  - `community.docker`
+- 🔐 Host key checking is disabled via `ANSIBLE_HOST_KEY_CHECKING=false` for smoother CI/CD use
+
 ## ⛓️‍💥 Links:
 - [Dockerhub](https://hub.docker.com/r/prplanit/ansible-oci): 
   - Public Image Releases.
@@ -12,20 +30,6 @@ Powered by Ansible 2.18.6, pre-loaded with common community collections and winr
   - Official Source, up to date; but 100% uptime can not be guaranteed.
 - [Github](https://github.com/sofmeright/ansible-oci):
   - Source is available, (This can get out of sync with Gitlab).
-
-## 🚀 Image Features
-
-- ✅ Based on **Python 3.13** + **Alpine 3.22** for minimal footprint
-- 🛠️ Includes:
-  - `ansible-core==2.18.6`
-  - `ansible-lint==25.6.1`
-  - `pywinrm` for Windows management
-  - `openssh-client`, `rsync` for secure file operations
-- 📦 Pre-installed Ansible collections:
-  - `ansible.posix`
-  - `ansible.windows`
-  - `community.docker`
-- 🔐 Host key checking is disabled via `ANSIBLE_HOST_KEY_CHECKING=false` for smoother CI/CD use
 
 ## ⚙️ Usage
 
