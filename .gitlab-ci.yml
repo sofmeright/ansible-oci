@@ -37,8 +37,14 @@ build-image:
     echo "$DOCKER_HUB_PASSWORD" | docker login -u "$DOCKER_HUB_USERNAME" --password-stdin                                                                   >/dev/null
     echo "Uploading $DOCKER_IMAGE:$DOCKER_TAG to the Docker Hub (docker.io)..."
     docker push "$DOCKER_IMAGE:$DOCKER_TAG"                                                                                                                 >/dev/null
-    docker push "$DOCKER_IMAGE:latest"
     if docker manifest inspect "$DOCKER_IMAGE:$DOCKER_TAG" > /dev/null 2>&1; then
+        echo "✅ Image $DOCKER_IMAGE:$DOCKER_TAG successfully pushed and verified."
+      else
+        echo "❌ Image push failed or is not available yet on the registry."
+        exit 1
+      fi
+    docker push "$DOCKER_IMAGE:latest"                                                                                                                      >/dev/null
+    if docker manifest inspect "$DOCKER_IMAGE:latest" > /dev/null 2>&1; then
         echo "✅ Image $DOCKER_IMAGE:$DOCKER_TAG successfully pushed and verified."
       else
         echo "❌ Image push failed or is not available yet on the registry."
