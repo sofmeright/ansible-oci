@@ -11,6 +11,7 @@ ENV ANSIBLE_HOST_KEY_CHECKING=False
 # Install system tools
 RUN apk add --no-cache \
     bash \
+    coreutils \
     curl \
     git \
     openssh \
