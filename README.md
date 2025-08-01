@@ -11,6 +11,7 @@ Powered by Ansible 2.18.6, pre-loaded with common community collections and winr
 - 🛠️ Includes:
   - `ansible-core==2.18.6`
   - `ansible-lint==25.6.1`
+  - `coreutils`
   - `curl`
   - `git`
   - `openssh`
