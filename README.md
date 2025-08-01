@@ -16,7 +16,9 @@ Powered by Ansible 2.18.6, pre-loaded with common community collections and winr
   - `openssh`
   - `openssh-keygen`
   - `pywinrm` for Windows management
+  - `rage`
   - `rsync`
+  - `sops`
 - 📦 Pre-installed Ansible collections:
   - `ansible.posix`
   - `ansible.windows`
