@@ -15,6 +15,7 @@ RUN apk add --no-cache \
     git \
     openssh \
     openssh-keygen \
+    rage \
     rsync
 
 # Install Python packages
@@ -30,5 +31,10 @@ RUN ansible-galaxy collection install \
     ansible.posix \
     ansible.windows \
     community.docker
+
+# Install SOPS (v3.10.2)
+RUN curl -LO https://github.com/getsops/sops/releases/download/v3.10.2/sops-v3.10.2.linux.amd64 && \
+    mv sops-v3.10.2.linux.amd64 /usr/local/bin/sops && \
+    chmod +x /usr/local/bin/sops
 
 CMD [ "ansible-playbook", "--version" ]
