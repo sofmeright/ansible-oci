@@ -5,6 +5,16 @@ A lightweight, production-ready Ansible Docker Image built on `python:3.13.5-alp
 
 Powered by Ansible 2.18.6, pre-loaded with common community collections and winrm support for managing Windows nodes.
 
+---
+
+## See Also:
+- [Ansible (Gitlab Component)](https://gitlab.prplanit.com/components/ansible)
+- [Ansible OCI](https://gitlab.prplanit.com/precisionplanit/ansible-oci) – Docker runtime image for Ansible workflows
+- [StageFreight GitLab Component](https://gitlab.prplanit.com/components/stagefreight) – GitLab CI pipeline orchestration for releases
+- [StageFreight OCI (Docker Image)](https://gitlab.prplanit.com/precisionplanit/stagefreight-oci) – GitLab CI pipeline orchestration for releases
+
+---
+
 ## 🚀 Image Features
 
 - ✅ Based on **Python 3.13.5** + **Alpine 3.22** for minimal footprint
@@ -26,6 +36,8 @@ Powered by Ansible 2.18.6, pre-loaded with common community collections and winr
   - `community.docker`
 - 🔐 Host key checking is disabled via `ANSIBLE_HOST_KEY_CHECKING=false` for smoother CI/CD use
 
+---
+
 ## ⛓️‍💥 Links:
 - [Dockerhub](https://hub.docker.com/r/prplanit/ansible-oci): 
   - Public Image Releases.
@@ -33,6 +45,8 @@ Powered by Ansible 2.18.6, pre-loaded with common community collections and winr
   - Official Source, up to date; but 100% uptime can not be guaranteed.
 - [Github](https://github.com/sofmeright/ansible-oci):
   - Source is available, (This can get out of sync with Gitlab).
+
+---
 
 ## ⚙️ Usage
 
@@ -91,11 +105,17 @@ ansible-playbook --version
 
 Override this by providing your own entrypoint or script.
 
+---
+
 ## 🫱🏽‍🫲🏽 Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you'd like to change.
 
+---
+
 ## 🪪 License
 Use it freely, deploy wisely, and remember: automation is power, but also responsibility.
+
+---
 
 ## ⚠️ Disclaimer
 > This image is provided as-is, without warranties, implied Ansible enlightenment, or protection from weekend-dev-ops rabbit holes. The author assumes no responsibility if your playbook summons demons or accidentally configures your microwave.
