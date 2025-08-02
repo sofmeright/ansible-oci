@@ -9,7 +9,7 @@ Powered by Ansible 2.18.6, pre-loaded with common community collections and winr
 
 ## See Also:
 - [Ansible (Gitlab Component)](https://gitlab.prplanit.com/components/ansible)
-- [StageFreight GitLab Component](https://gitlab.prplanit.com/components/stagefreight) – GitLab CI pipeline orchestration for releases
+- [StageFreight OCI (Docker Image)](https://gitlab.prplanit.com/precisionplanit/stagefreight-oci) – A general-purpose DevOps automation image built to accelerate CI/CD pipelines.
 - [StageFreight OCI (Docker Image)](https://gitlab.prplanit.com/precisionplanit/stagefreight-oci) – GitLab CI pipeline orchestration for releases
 
 ---
