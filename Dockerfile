@@ -23,8 +23,8 @@ RUN apk add --no-cache \
 RUN pip3 install --upgrade pip
 RUN pip3 install \
     requests \
-    ansible-core==2.18.6 \
-    ansible-lint==25.6.1 \
+    ansible-core==2.18.7 \
+    ansible-lint==25.7.0 \
     pywinrm
 
 # Install Ansible collections
