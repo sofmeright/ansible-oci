@@ -31,7 +31,8 @@ RUN pip3 install \
 RUN ansible-galaxy collection install \
     ansible.posix \
     ansible.windows \
-    community.docker
+    community.docker \
+    community.sops
 
 # Install SOPS (v3.10.2)
 RUN curl -LO https://github.com/getsops/sops/releases/download/v3.10.2/sops-v3.10.2.linux.amd64 && \
