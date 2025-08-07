@@ -18,7 +18,7 @@ RUN apk add --no-cache \
     openssh \
     openssh-keygen \
     rage \
-    rsync \
+    rsync
 
 # Install yq
 ENV YQ_VERSION=v4.44.1 \
