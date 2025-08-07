@@ -23,12 +23,14 @@ Powered by Ansible 2.18.6, pre-loaded with common community collections and winr
   - `coreutils`
   - `curl`
   - `git`
+  - `jq`
   - `openssh`
   - `openssh-keygen`
   - `pywinrm` for Windows management
   - `rage`
   - `rsync`
   - `sops`
+  - `yq`
 - 📦 Pre-installed Ansible collections:
   - `ansible.posix`
   - `ansible.windows`
