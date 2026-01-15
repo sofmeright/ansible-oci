@@ -1,7 +1,7 @@
 ![Latest Release](https://gitlab.prplanit.com/precisionplanit/ansible-oci/-/badges/release.svg) ![Latest Release Status](https://gitlab.prplanit.com/precisionplanit/ansible-oci/-/raw/main/assets/badge-release-status.svg) [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/T6T41IT163)
 # ![Ansible](https://gitlab.prplanit.com/uploads/-/system/project/avatar/21/Ansible_Logo.png?width=20) Ansible OCI
 
-A lightweight, production-ready Ansible Docker Image built on `python:3.13.5-alpine3.23`. This image was designed for running playbooks in CI/CD pipelines or local automation tasks.
+A lightweight, production-ready Ansible Docker Image built on `python:3.14.2-alpine3.23`. This image was designed for running playbooks in CI/CD pipelines or local automation tasks.
 
 Powered by Ansible 2.20.1, pre-loaded with common community collections and winrm support for managing Windows nodes.
 
@@ -16,7 +16,7 @@ Powered by Ansible 2.20.1, pre-loaded with common community collections and winr
 
 ## 🚀 Image Features
 
-- ✅ Based on **Python 3.13.5** + **Alpine 3.23** for minimal footprint
+- ✅ Based on **Python 3.14.2** + **Alpine 3.23** for minimal footprint
 - 🛠️ Includes:
   - `ansible-core==2.20.1`
   - `ansible-lint==26.1.0`
