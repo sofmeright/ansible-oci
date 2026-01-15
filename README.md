@@ -1,9 +1,9 @@
 ![Latest Release](https://gitlab.prplanit.com/precisionplanit/ansible-oci/-/badges/release.svg) ![Latest Release Status](https://gitlab.prplanit.com/precisionplanit/ansible-oci/-/raw/main/assets/badge-release-status.svg) [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/T6T41IT163)
 # ![Ansible](https://gitlab.prplanit.com/uploads/-/system/project/avatar/21/Ansible_Logo.png?width=20) Ansible OCI
 
-A lightweight, production-ready Ansible Docker Image built on `python:3.13.5-alpine3.22` (plans to update as needed). This image was designed for running playbooks in CI/CD pipelines or local automation tasks.
+A lightweight, production-ready Ansible Docker Image built on `python:3.13.5-alpine3.23`. This image was designed for running playbooks in CI/CD pipelines or local automation tasks.
 
-Powered by Ansible 2.18.6, pre-loaded with common community collections and winrm support for managing Windows nodes.
+Powered by Ansible 2.20.1, pre-loaded with common community collections and winrm support for managing Windows nodes.
 
 ---
 
@@ -16,10 +16,10 @@ Powered by Ansible 2.18.6, pre-loaded with common community collections and winr
 
 ## 🚀 Image Features
 
-- ✅ Based on **Python 3.13.5** + **Alpine 3.22** for minimal footprint
+- ✅ Based on **Python 3.13.5** + **Alpine 3.23** for minimal footprint
 - 🛠️ Includes:
-  - `ansible-core==2.18.6`
-  - `ansible-lint==25.6.1`
+  - `ansible-core==2.20.1`
+  - `ansible-lint==26.1.0`
   - `coreutils`
   - `curl`
   - `git`
@@ -29,8 +29,8 @@ Powered by Ansible 2.18.6, pre-loaded with common community collections and winr
   - `pywinrm` for Windows management
   - `rage`
   - `rsync`
-  - `sops`
-  - `yq`
+  - `sops==3.11.0`
+  - `yq==4.50.1`
 - 📦 Pre-installed Ansible collections:
   - `ansible.posix`
   - `ansible.windows`
@@ -41,7 +41,7 @@ Powered by Ansible 2.18.6, pre-loaded with common community collections and winr
 ---
 
 ## ⛓️‍💥 Links:
-- [Dockerhub](https://hub.docker.com/r/prplanit/ansible-oci): 
+- [Dockerhub](https://hub.docker.com/r/prplanit/ansible-oci):
   - Public Image Releases.
 - [GitLab](https://gitlab.prplanit.com/precisionplanit/ansible-oci):
   - Official Source, up to date; but 100% uptime can not be guaranteed.
@@ -58,11 +58,13 @@ Powered by Ansible 2.18.6, pre-loaded with common community collections and winr
 docker run --rm -v $(pwd):/app -w /app prplanit/ansible-oci:latest ansible-playbook playbook.yaml
 ```
 #### Advanced Example:
+
 ```
 docker run -v ./playbook.yaml:/root/playbook.yaml -v /srv/gitops/ad-arbitorium-private:/srv/gitops/ad-arbitorium-private -v ~/.ssh/id_rsa:/root/.ssh/id_rsa --rm prplanit/ansible-oci:latest ansible-playbook --private-key /root/.ssh/id_rsa -i /srv/gitops/ad-arbitorium-private/ansible/inventory /root/playbook.yaml -e ansible_windows_password=$WINDOWS_ANSIBLE_PASSWORD
 ```
 
 ### 📦 Use in GitLab CI/CD
+
 
 ```yaml
 ansible-deploy:
@@ -110,11 +112,14 @@ Override this by providing your own entrypoint or script.
 ---
 
 ## 🫱🏽‍🫲🏽 Contributing
+
+
 Pull requests are welcome. For major changes, please open an issue first to discuss what you'd like to change.
 
 ---
 
 ## 🪪 License
+
 Use it freely, deploy wisely, and remember: automation is power, but also responsibility.
 
 ---
