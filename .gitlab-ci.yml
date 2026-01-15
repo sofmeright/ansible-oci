@@ -5,6 +5,7 @@ cache:
         
 stages:
   - build
+  - security
   - release
 
 include:
