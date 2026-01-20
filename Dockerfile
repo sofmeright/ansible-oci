@@ -55,6 +55,7 @@ RUN pip3 install --no-cache-dir --upgrade pip && \
     pip3 install --no-cache-dir \
     ansible-core==${ANSIBLE_CORE_VERSION} \
     ansible-lint==${ANSIBLE_LINT_VERSION} \
+    kubernetes \
     pywinrm \
     requests
 
