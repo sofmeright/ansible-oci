@@ -65,7 +65,8 @@ RUN ansible-galaxy collection install \
     ansible.posix \
     ansible.windows \
     community.docker \
-    community.sops
+    community.sops \
+    kubernetes.core
 
 # ============================================================================
 # Default command
