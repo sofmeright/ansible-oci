@@ -36,6 +36,7 @@ Powered by Ansible 2.20.1, pre-loaded with common community collections and winr
   - `ansible.windows`
   - `community.docker`
   - `community.sops`
+  - `kubernetes.core`
 - 🔐 Host key checking is disabled via `ANSIBLE_HOST_KEY_CHECKING=false` for smoother CI/CD use
 
 ---
