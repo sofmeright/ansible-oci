@@ -30,7 +30,8 @@ WORKDIR /app
 # ============================================================================
 # System packages
 # ============================================================================
-RUN apk add --no-cache \
+RUN apk upgrade --no-cache && \
+    apk add --no-cache \
     bash \
     coreutils \
     curl \
