@@ -1,0 +1,111 @@
+---
+
+spec:
+  inputs:
+    # input_section_name- Gitlab Job Config
+    # input_section_desc- Inputs that configure GitLab Job behavior
+    job:
+      description: 'The intended name of the CI job spawned by this component.'
+      default: run-ansible
+    artifacts:
+      description: 'An array of paths to preserve as CI/CD artifacts.'
+      type: array
+      default: []
+    gitlab_branch:
+      description: 'Target Git branch for commits.'
+      default: 'main'
+    gitlab_token:
+      description: 'Token for authenticating GitLab API calls.'
+      default: ''
+    stage:
+      description: 'The intended name of the CI stage this job will run in.'
+      default: ansible
+    # input_section_name- Ansible Config
+    # input_section_desc- Configuration settings for Ansible execution
+    ansible_host_key_checking:
+      description: 'Disables SSH host key checking. (Discouraged in untrusted environments.)'
+      default: false
+    ansible_inventory:
+      description: 'Path to an inventory file with hosts/infra to target.'
+      default: ansible/inventory
+    ansible_playbook:
+      description: 'Path to a playbook file.'
+    sops_age_key_b64:
+      description: 'A Base64-encoded Age key for SOPS.'
+      default: ''
+    sops_age_key_path:
+      description: 'Path to an Age key stored as a file for SOPS.'
+      default: ''
+    ssh_private_key:
+      description: 'The SSH private key used for SSH key-based auth.'
+      default: ''
+    windows_password:
+      description: 'The password used to connect to non-domain managed Windows hosts.'
+      default: ''
+    working_dir:
+      description: 'The base path to assign during ansible execution.'
+      default: ''
+
+---
+
+'$[[ inputs.job ]]':
+  artifacts:
+    when: always
+    paths: $[[ inputs.artifacts ]]
+  image:
+    name: prplanit/ansible-oci:latest
+    entrypoint: [""]
+  rules:
+    - if: '$CI_COMMIT_REF_NAME == "main"'
+      #changes:
+        #- '$[[ inputs.root_dir ]]/$[[ inputs.project_file ]]'
+  stage: '$[[ inputs.stage ]]'
+  variables:
+    ANSIBLE_HOST_KEY_CHECKING: $[[ inputs.ansible_host_key_checking ]]
+    ANSIBLE_INVENTORY: $[[ inputs.ansible_inventory ]]
+    ANSIBLE_PLAYBOOK: $[[ inputs.ansible_playbook ]]
+    GITLAB_BRANCH: $[[ inputs.gitlab_branch ]]
+    GITLAB_TOKEN: $[[ inputs.gitlab_token ]]
+    SOPS_AGE_KEY_FILE: $[[ inputs.sops_age_key_path ]]
+    SSH_PRIVATE_KEY: $[[ inputs.ssh_private_key ]]
+    WINDOWS_PASSWORD: $[[ inputs.windows_password ]]
+    WORKING_DIR: $[[ inputs.working_dir ]]
+
+  before_script: |
+    eval "$(ssh-agent -s)"
+    mkdir -p ~/.ssh
+    cat "$SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa
+    chmod 400 ~/.ssh/id_rsa
+    ssh-add ~/.ssh/id_rsa
+
+    # Optional: decode Age key from env if present
+    if [ -n "$SOPS_AGE_KEY_B64" ]; then
+      mkdir -p /run/secrets
+      echo "$SOPS_AGE_KEY_B64" | base64 -d > /run/secrets/age_key
+      export SOPS_AGE_KEY_FILE=/run/secrets/age_key
+      chmod 400 "$SOPS_AGE_KEY_FILE"
+      
+      # Also export the key directly as backup
+      export SOPS_AGE_KEY=$(cat /run/secrets/age_key)
+    fi
+
+    # Verify the setup
+    echo "SOPS_AGE_KEY_FILE: $SOPS_AGE_KEY_FILE"
+    ls -la /run/secrets/age_key 2>/dev/null || echo "Age key file not found"
+  script: |
+    echo "---------------------------------------------------------------------------"
+    echo "Ansible GitOps Component 🅰️ - Playbook - Now launching the specified Ansible playbook"
+    echo "---------------------------------------------------------------------------"
+    ansible-playbook -i "${ANSIBLE_INVENTORY}" "${ANSIBLE_PLAYBOOK}" \
+      -e "ansible_host_key_checking=${ANSIBLE_HOST_KEY_CHECKING}" \
+      -e "ci_commit_ref_name=${CI_COMMIT_REF_NAME}" \
+      -e "ci_commit_tag=${CI_COMMIT_TAG}" \
+      -e "ci_project_dir=${CI_PROJECT_DIR}" \
+      -e "gitlab_api_url=${CI_API_V4_URL}" \
+      -e "gitlab_branch=${GITLAB_BRANCH}" \
+      -e "gitlab_project_id=${CI_PROJECT_ID}" \
+      -e "gitlab_token=${GITLAB_TOKEN}" \
+      -e "windows_password=${WINDOWS_PASSWORD}"
+    echo "---------------------------------------------------------------------------"
+    echo " Ansible GitOps Component 🅰️ - exit - Finished executing the specified Ansible playbook ✅"
+    echo "---------------------------------------------------------------------------"

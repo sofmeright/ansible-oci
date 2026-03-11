@@ -1,0 +1,45 @@
+---
+spec:
+  inputs:
+    # input_section_name- Ansible Testing Config
+    # input_section_desc- Configuration for Ansible testing and linting jobs
+    job:
+      description: 'The intended name of the CI job spawned by this component.'
+      default: test-ansible
+    stage:
+      description: 'The intended name of the CI stage this job will run in.'
+      default: test
+    root_dir:
+      description: 'Root directory containing Ansible config, inventory, and playbooks.'
+      default: ${CI_PROJECT_DIR}/ansible
+    project_file:
+      description: 'The filename of a valid Ansible Playbook that will be tested/linted.'
+
+---
+'$[[ inputs.job ]]':
+  stage: '$[[ inputs.stage ]]'
+  image:
+    name: prplanit/ansible-oci:latest
+    entrypoint: [""]
+  variables:
+    ANSIBLE_DIR: "$[[ inputs.root_dir ]]"
+    PROJECT_FILE: "$[[ inputs.project_file ]]"
+  before_script: |
+    echo "---------------------------------------------------------------------------"
+    echo "AntParade 🐜 GitOps - Preparing $CI_JOB_IMAGE to test/lint Ansible playbooks & tasks..."
+    echo "---------------------------------------------------------------------------"
+    echo "Installing dependencies..."
+    echo "---------------------------------------------------------------------------"
+    echo "Entering the Ansible root directory"
+    cd ${ANSIBLE_DIR} >/dev/null
+  script: |
+    echo "---------------------------------------------------------------------------"
+    echo "AntParade 🐜 GitOps - Begin (test) linting Ansible playbooks & tasks..."
+    echo "---------------------------------------------------------------------------"
+    ansible-lint ${PROJECT_FILE}
+  rules:
+    - if: |
+        $CI_PIPELINE_SOURCE == "push" ||
+        $CI_PIPELINE_SOURCE == "merge_request_event"
+      #changes:
+        #- '$[[ inputs.root_dir ]]/**'

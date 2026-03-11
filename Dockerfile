@@ -1,4 +1,4 @@
-FROM python:3.14.2-alpine3.23
+FROM python:3.14.3-alpine3.23
 
 # ============================================================================
 # Metadata
@@ -6,19 +6,19 @@ FROM python:3.14.2-alpine3.23
 LABEL maintainer="SoFMeRight <sofmeright@gmail.com>" \
     org.opencontainers.image.title="ansible-oci" \
     org.opencontainers.image.description="A lightweight Alpine-based Ansible image with core system tools, Windows support (via pywinrm), and essential community collections preinstalled." \
-    org.opencontainers.image.source="https://github.com/sofmeright/ansible-oci" \
+    org.opencontainers.image.source="https://github.com/prplanit/ansible-oci" \
     org.opencontainers.image.url="https://hub.docker.com/r/prplanit/ansible-oci" \
-    org.opencontainers.image.documentation="https://github.com/sofmeright/ansible-oci#readme" \
+    org.opencontainers.image.documentation="https://github.com/prplanit/ansible-oci#readme" \
     org.opencontainers.image.licenses="GPL-3.0" \
-    org.opencontainers.image.vendor="SoFMeRight"
+    org.opencontainers.image.vendor="PrecisionPlanIT"
 
 # ============================================================================
 # Versions
 # ============================================================================
-ARG YQ_VERSION=v4.50.1
-ARG SOPS_VERSION=v3.11.0
-ARG ANSIBLE_CORE_VERSION=2.20.1
-ARG ANSIBLE_LINT_VERSION=26.1.0
+ARG YQ_VERSION=v4.52.4
+ARG SOPS_VERSION=v3.12.1
+ARG ANSIBLE_CORE_VERSION=2.20.3
+ARG ANSIBLE_LINT_VERSION=26.3.0
 
 # ============================================================================
 # Environment
