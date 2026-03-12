@@ -3,7 +3,7 @@
 ## Run Locally
 
 ```bash
-docker run --rm -v $(pwd):/app -w /app docker.io/prplanit/ansible-oci:latest ansible-playbook playbook.yaml
+docker run --rm -v $(pwd):/app -w /app docker.io/hlhd/ansible:latest ansible-playbook playbook.yaml
 ```
 
 ### Advanced Example
@@ -13,7 +13,7 @@ docker run --rm \
   -v ./playbook.yaml:/root/playbook.yaml \
   -v /srv/gitops/project:/srv/gitops/project \
   -v ~/.ssh/id_rsa:/root/.ssh/id_rsa \
-  docker.io/prplanit/ansible-oci:latest \
+  docker.io/hlhd/ansible:latest \
   ansible-playbook --private-key /root/.ssh/id_rsa \
     -i /srv/gitops/project/ansible/inventory \
     /root/playbook.yaml \
@@ -25,7 +25,7 @@ docker run --rm \
 ```yaml
 ansible-deploy:
   stage: deploy
-  image: docker.io/prplanit/ansible-oci:latest
+  image: docker.io/hlhd/ansible:latest
   script:
     - ansible-playbook ansible/deploy.yaml -i ansible/inventory
 ```
@@ -77,7 +77,7 @@ The [CI component](Component.md) handles this automatically. When running the im
 ```bash
 docker run --rm \
   -v ~/.ssh/id_rsa:/root/.ssh/id_rsa:ro \
-  docker.io/prplanit/ansible-oci:latest \
+  docker.io/hlhd/ansible:latest \
   ansible-playbook --private-key /root/.ssh/id_rsa -i inventory playbook.yaml
 ```
 

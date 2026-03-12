@@ -16,7 +16,7 @@ Pass the Windows password via the `windows_password` input:
 ```yaml
 deploy-windows:
   stage: deploy
-  component: $CI_SERVER_FQDN/precisionplanit/ansible-oci/run@~latest
+  component: $CI_SERVER_FQDN/PrPlanIT/homelabhd/ansible/run@~latest
   inputs:
     ansible_playbook: "ansible/playbooks/windows-deploy.yaml"
     windows_password: $ANSIBLE_WINDOWS_PASSWORD
@@ -27,7 +27,7 @@ deploy-windows:
 ```bash
 docker run --rm \
   -v $(pwd):/app -w /app \
-  docker.io/prplanit/ansible-oci:latest \
+  docker.io/hlhd/ansible:latest \
   ansible-playbook -i inventory playbook.yaml \
     -e ansible_windows_password=$WINDOWS_ANSIBLE_PASSWORD
 ```

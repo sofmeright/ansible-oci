@@ -19,7 +19,7 @@ spec:
 '$[[ inputs.job ]]':
   stage: '$[[ inputs.stage ]]'
   image:
-    name: prplanit/ansible-oci:latest
+    name: docker.io/hlhd/ansible:latest
     entrypoint: [""]
   variables:
     ANSIBLE_DIR: "$[[ inputs.root_dir ]]"

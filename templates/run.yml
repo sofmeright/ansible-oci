@@ -53,7 +53,7 @@ spec:
     when: always
     paths: $[[ inputs.artifacts ]]
   image:
-    name: prplanit/ansible-oci:latest
+    name: docker.io/hlhd/ansible:latest
     entrypoint: [""]
   rules:
     - if: '$CI_COMMIT_REF_NAME == "main"'
