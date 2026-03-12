@@ -1,6 +1,6 @@
 # Windows Support
 
-Ansible OCI includes `pywinrm` for managing Windows hosts via WinRM.
+Ansible includes `pywinrm` for managing Windows hosts via WinRM.
 
 ## Inventory Configuration
 

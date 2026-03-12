@@ -1,6 +1,6 @@
 # GitLab CI Component
 
-Ansible OCI ships reusable GitLab CI component templates for structured playbook execution and testing.
+Ansible ships reusable GitLab CI component templates for structured playbook execution and testing.
 
 > Requires GitLab 15.11+ and [Component CI/CD syntax](https://docs.gitlab.com/ee/ci/components/).
 

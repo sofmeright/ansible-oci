@@ -21,7 +21,7 @@ policies:
     main: "^main$"
 
 builds:
-  - id: ansible-oci
+  - id: ansible
     kind: docker
     platforms: [linux/amd64]
 
@@ -29,7 +29,7 @@ targets:
   # ── Docker Hub: stable releases ─────────────────────────────────
   - id: dockerhub-stable
     kind: registry
-    build: ansible-oci
+    build: ansible
     url: docker.io
     provider: docker
     path: "{var:org}/{var:repo}"
@@ -42,7 +42,7 @@ targets:
   # ── Docker Hub: pre-releases ────────────────────────────────────
   - id: dockerhub-prerelease
     kind: registry
-    build: ansible-oci
+    build: ansible
     url: docker.io
     provider: docker
     path: "{var:org}/{var:repo}"
@@ -54,7 +54,7 @@ targets:
   # ── Docker Hub: dev builds on every commit ──────────────────────
   - id: dockerhub-dev
     kind: registry
-    build: ansible-oci
+    build: ansible
     url: docker.io
     provider: docker
     path: "{var:org}/{var:repo}"
