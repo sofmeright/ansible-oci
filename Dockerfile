@@ -3,14 +3,14 @@ FROM python:3.14.3-alpine3.23
 # ============================================================================
 # Metadata
 # ============================================================================
-LABEL maintainer="SoFMeRight <sofmeright@gmail.com>" \
-    org.opencontainers.image.title="ansible-oci" \
+LABEL maintainer="HomeLabHD <homelabhelp@gmail.com>" \
+    org.opencontainers.image.title="ansible" \
     org.opencontainers.image.description="A lightweight Alpine-based Ansible image with core system tools, Windows support (via pywinrm), and essential community collections preinstalled." \
-    org.opencontainers.image.source="https://github.com/prplanit/ansible-oci" \
-    org.opencontainers.image.url="https://hub.docker.com/r/prplanit/ansible-oci" \
-    org.opencontainers.image.documentation="https://github.com/prplanit/ansible-oci#readme" \
+    org.opencontainers.image.source="https://github.com/HomeLabHD/ansible" \
+    org.opencontainers.image.url="https://hub.docker.com/r/hlhd/ansible" \
+    org.opencontainers.image.documentation="https://github.com/HomeLabHD/ansible#readme" \
     org.opencontainers.image.licenses="GPL-3.0" \
-    org.opencontainers.image.vendor="PrecisionPlanIT"
+    org.opencontainers.image.vendor="HomeLabHD"
 
 # ============================================================================
 # Versions
