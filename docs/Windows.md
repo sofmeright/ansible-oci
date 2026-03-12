@@ -16,7 +16,7 @@ Pass the Windows password via the `windows_password` input:
 ```yaml
 deploy-windows:
   stage: deploy
-  component: $CI_SERVER_FQDN/PrPlanIT/homelabhd/ansible/run@~latest
+  component: $CI_SERVER_FQDN/PrPlanIT/HomeLabHD/ansible/run@~latest
   inputs:
     ansible_playbook: "ansible/playbooks/windows-deploy.yaml"
     windows_password: $ANSIBLE_WINDOWS_PASSWORD

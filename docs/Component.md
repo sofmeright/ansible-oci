@@ -11,7 +11,7 @@ Executes an Ansible playbook with automatic SSH key injection, SOPS support, and
 ```yaml
 deploy:
   stage: deploy
-  component: $CI_SERVER_FQDN/PrPlanIT/homelabhd/ansible/run@~latest
+  component: $CI_SERVER_FQDN/PrPlanIT/HomeLabHD/ansible/run@~latest
   inputs:
     ansible_playbook: "ansible/playbooks/deploy.yaml"
     ssh_private_key: $SSH_PRIVATE_KEY
@@ -50,7 +50,7 @@ Lints and validates Ansible playbooks.
 ```yaml
 lint:
   stage: test
-  component: $CI_SERVER_FQDN/PrPlanIT/homelabhd/ansible/test@~latest
+  component: $CI_SERVER_FQDN/PrPlanIT/HomeLabHD/ansible/test@~latest
   inputs:
     project_file: "playbooks/deploy.yaml"
 ```
