@@ -17,26 +17,58 @@ A lightweight, production-ready Ansible Docker image built on `python:3.14.3-alp
 ### Base Image
 
 <!-- sf:versions:start -->
+| Name | Version | Source Ref |
+| --- | --- | --- |
+| alpine | 3.23 | FROM python:3.14.3-alpine3.23 |
+| python | 3.14.3 | FROM python:3.14.3-alpine3.23 |
 <!-- sf:versions:end -->
 
 ### System Packages
 
 <!-- sf:apk:start -->
+- bash
+- coreutils
+- curl
+- git
+- jq
+- openssh
+- openssh-keygen
+- rage
+- rsync
 <!-- sf:apk:end -->
 
 ### Python Packages
 
 <!-- sf:pip:start -->
+| Name | Version | Pinned |
+| --- | --- | --- |
+| ansible-core | 2.20.3 | yes |
+| ansible-lint | 26.3.0 | yes |
+| hvac |  | no |
+| kubernetes |  | no |
+| pip |  | no |
+| pywinrm |  | no |
+| requests |  | no |
 <!-- sf:pip:end -->
 
 ### Ansible Collections
 
 <!-- sf:galaxy:start -->
+- ansible.posix
+- ansible.windows
+- community.docker
+- community.hashi_vault
+- community.sops
+- kubernetes.core
 <!-- sf:galaxy:end -->
 
 ### Binary Tools
 
 <!-- sf:binaries:start -->
+| Name | Version | Pinned |
+| --- | --- | --- |
+| sops | v3.12.1 | yes |
+| yq | v4.52.4 | yes |
 <!-- sf:binaries:end -->
 
 ### Documentation
