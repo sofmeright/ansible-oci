@@ -84,6 +84,17 @@ targets:
     aliases: ["{version}", "latest"]
     when: { git_tags: [stable], events: [tag] }
 
+  # ── GitHub release sync ──────────────────────────────────────────
+  - id: github-release
+    kind: release
+    provider: github
+    url: https://github.com
+    project_id: "{var:github_org}/{var:repo}"
+    credentials: GITHUB
+    sync_release: true
+    sync_assets: true
+    when: { git_tags: [stable], events: [tag] }
+
 narrator:
   - file: "README.md"
     link_base: "https://github.com/{var:github_org}/{var:repo}/blob/main"
@@ -309,6 +320,58 @@ narrator:
         color: "#555"
         output: ".stagefreight/badges/dev-size.svg"
         link: "https://hub.docker.com/r/{var:org}/{var:repo}/tags?name=latest-dev"
+
+      # ── Build contents: base image versions ────────────────────
+      - id: contents.versions
+        kind: build-contents
+        placement:
+          between: ["<!-- sf:versions:start -->", "<!-- sf:versions:end -->"]
+          mode: replace
+        section: "inventories.versions"
+        renderer: table
+        columns: [name, version, source_ref]
+
+      # ── Build contents: system packages (apk) ─────────────────
+      - id: contents.apk
+        kind: build-contents
+        placement:
+          between: ["<!-- sf:apk:start -->", "<!-- sf:apk:end -->"]
+          mode: replace
+        section: "inventories.apk"
+        renderer: list
+
+      # ── Build contents: python packages (pip) ──────────────────
+      - id: contents.pip
+        kind: build-contents
+        placement:
+          between: ["<!-- sf:pip:start -->", "<!-- sf:pip:end -->"]
+          mode: replace
+        section: "inventories.pip"
+        renderer: table
+        columns: [name, version, pinned]
+
+      # ── Build contents: ansible collections (galaxy) ───────────
+      - id: contents.galaxy
+        kind: build-contents
+        placement:
+          between: ["<!-- sf:galaxy:start -->", "<!-- sf:galaxy:end -->"]
+          mode: replace
+        section: "inventories.galaxy"
+        renderer: list
+
+      # ── Build contents: binary tools ───────────────────────────
+      - id: contents.binaries
+        kind: build-contents
+        placement:
+          between: ["<!-- sf:binaries:start -->", "<!-- sf:binaries:end -->"]
+          mode: replace
+        section: "inventories.binaries"
+        renderer: table
+        columns: [name, version, pinned]
+
+manifest:
+  enabled: true
+  mode: workspace
 
 lint:
   level: full

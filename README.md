@@ -14,17 +14,30 @@ A lightweight, production-ready Ansible Docker image built on `python:3.14.3-alp
 [![latest](https://raw.githubusercontent.com/HomeLabHD/ansible/main/.stagefreight/badges/latest.svg)](https://hub.docker.com/r/hlhd/ansible/tags?name=latest) ![updated](https://raw.githubusercontent.com/HomeLabHD/ansible/main/.stagefreight/badges/release-updated.svg) [![size](https://raw.githubusercontent.com/HomeLabHD/ansible/main/.stagefreight/badges/release-size.svg)](https://hub.docker.com/r/hlhd/ansible/tags?name=v2.20.1) [![latest-dev](https://raw.githubusercontent.com/HomeLabHD/ansible/main/.stagefreight/badges/latest-dev.svg)](https://hub.docker.com/r/hlhd/ansible/tags?name=latest-dev) ![updated](https://raw.githubusercontent.com/HomeLabHD/ansible/main/.stagefreight/badges/dev-updated.svg) [![size](https://raw.githubusercontent.com/HomeLabHD/ansible/main/.stagefreight/badges/dev-size.svg)](https://hub.docker.com/r/hlhd/ansible/tags?name=latest-dev)
 <!-- sf:image:end -->
 
-### Features
+### Base Image
 
-|                                    |                                                                                     |
-| ---------------------------------- | ----------------------------------------------------------------------------------- |
-| **Alpine-based**                   | Python 3.14.3 + Alpine 3.23 for minimal footprint                                   |
-| **Ansible Core 2.20.3**           | With ansible-lint 26.3.0 for playbook validation                                     |
-| **Windows Support**               | pywinrm included for managing Windows hosts via WinRM                                |
-| **SOPS Integration**              | rage + sops 3.12.1 for encrypted secret management                                   |
-| **Community Collections**         | ansible.posix, ansible.windows, community.docker, community.sops, kubernetes.core     |
-| **CI/CD Ready**                   | GitLab CI component templates included for structured playbook execution              |
-| **System Tools**                  | bash, coreutils, curl, git, jq, openssh, rsync, yq 4.52.4                           |
+<!-- sf:versions:start -->
+<!-- sf:versions:end -->
+
+### System Packages
+
+<!-- sf:apk:start -->
+<!-- sf:apk:end -->
+
+### Python Packages
+
+<!-- sf:pip:start -->
+<!-- sf:pip:end -->
+
+### Ansible Collections
+
+<!-- sf:galaxy:start -->
+<!-- sf:galaxy:end -->
+
+### Binary Tools
+
+<!-- sf:binaries:start -->
+<!-- sf:binaries:end -->
 
 ### Documentation
 
