@@ -373,6 +373,8 @@ narrator:
           mode: replace
         section: "inventories.pip"
         renderer: badges
+        wrap: details
+        summary: "Python packages (pip)"
 
       # ── Collections: galaxy ─────────────────────────────────────
       - id: usage.galaxy
@@ -382,6 +384,8 @@ narrator:
           mode: replace
         section: "inventories.galaxy"
         renderer: badges
+        wrap: details
+        summary: "Ansible collections (galaxy)"
 
 manifest:
   enabled: true
