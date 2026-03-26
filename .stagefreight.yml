@@ -316,6 +316,8 @@ narrator:
           mode: replace
         section: "inventories.versions"
         renderer: versions
+        wrap: details
+        summary: "Base image"
 
       # ── Build contents: system packages (apk) ─────────────────
       - id: contents.apk
