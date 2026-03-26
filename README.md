@@ -50,7 +50,7 @@ Built from `python:3.14.3-alpine3.23`.
 ### Binary Tools
 
 <!-- sf:binaries:start -->
-![sops](https://img.shields.io/badge/sops-v3.12.1-2ea043?style=flat) ![yq](https://img.shields.io/badge/yq-v4.52.4-2ea043?style=flat)
+![sops](https://img.shields.io/badge/sops-v3.12.2-2ea043?style=flat) ![yq](https://img.shields.io/badge/yq-v4.52.5-2ea043?style=flat)
 <!-- sf:binaries:end -->
 
 ### Documentation
