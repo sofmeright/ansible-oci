@@ -391,6 +391,14 @@ narrator:
         section: "inventories.galaxy"
         renderer: badges
 
+docs:
+  commit:
+    add:
+      - README.md
+      - docs/Usage.md
+      - docs/modules
+      - .stagefreight/badges
+
 manifest:
   enabled: true
   mode: workspace
