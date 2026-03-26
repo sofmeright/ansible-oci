@@ -316,6 +316,8 @@ narrator:
           mode: replace
         section: "inventories.versions"
         renderer: versions
+        wrap: details
+        summary: "Base image"
 
       # ── Build contents: system packages (apk) ─────────────────
       - id: contents.apk
@@ -324,7 +326,9 @@ narrator:
           between: ["<!-- sf:apk:start -->", "<!-- sf:apk:end -->"]
           mode: replace
         section: "inventories.apk"
-        renderer: list
+        renderer: badges
+        wrap: details
+        summary: "System packages (apk)"
 
       # ── Build contents: python packages (pip) ──────────────────
       - id: contents.pip
@@ -333,8 +337,9 @@ narrator:
           between: ["<!-- sf:pip:start -->", "<!-- sf:pip:end -->"]
           mode: replace
         section: "inventories.pip"
-        renderer: table
-        columns: [name, version, pinned]
+        renderer: badges
+        wrap: details
+        summary: "Python packages (pip)"
 
       # ── Build contents: ansible collections (galaxy) ───────────
       - id: contents.galaxy
@@ -343,7 +348,9 @@ narrator:
           between: ["<!-- sf:galaxy:start -->", "<!-- sf:galaxy:end -->"]
           mode: replace
         section: "inventories.galaxy"
-        renderer: list
+        renderer: badges
+        wrap: details
+        summary: "Ansible collections (galaxy)"
 
       # ── Build contents: binary tools ───────────────────────────
       - id: contents.binaries
@@ -352,8 +359,9 @@ narrator:
           between: ["<!-- sf:binaries:start -->", "<!-- sf:binaries:end -->"]
           mode: replace
         section: "inventories.binaries"
-        renderer: table
-        columns: [name, version, pinned]
+        renderer: badges
+        wrap: details
+        summary: "Binary tools"
 
 manifest:
   enabled: true
