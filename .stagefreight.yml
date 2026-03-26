@@ -13,6 +13,15 @@ sources:
     url: "https://gitlab.prplanit.com/{var:gitlab_group}/{var:repo}"
     default_branch: "main"
 
+  accessories:
+    - id: github
+      provider: github
+      url: "https://github.com"
+      project_id: "{var:github_org}/{var:repo}"
+      credentials: GITHUB
+      sync:
+        git: true
+
 policies:
   git_tags:
     stable: "^\\d+\\.\\d+\\.\\d+-v\\d+$"
