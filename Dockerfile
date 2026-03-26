@@ -15,8 +15,8 @@ LABEL maintainer="HomeLabHD <homelabhelp@gmail.com>" \
 # ============================================================================
 # Versions
 # ============================================================================
-ARG YQ_VERSION=v4.52.4
-ARG SOPS_VERSION=v3.12.1
+ARG YQ_VERSION=v4.52.5
+ARG SOPS_VERSION=v3.12.2
 ARG ANSIBLE_CORE_VERSION=2.20.4
 ARG ANSIBLE_LINT_VERSION=26.3.0
 
