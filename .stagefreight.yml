@@ -13,7 +13,7 @@ sources:
     url: "https://gitlab.prplanit.com/{var:gitlab_group}/{var:repo}"
     default_branch: "main"
 
-  accessories:
+  mirrors:
     - id: github
       provider: github
       url: "https://github.com"
