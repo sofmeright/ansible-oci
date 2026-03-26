@@ -14,44 +14,23 @@ A lightweight, production-ready Ansible Docker image built on `python:3.14.3-alp
 [![latest](https://raw.githubusercontent.com/HomeLabHD/ansible/main/.stagefreight/badges/latest.svg)](https://hub.docker.com/r/hlhd/ansible/tags?name=latest) ![updated](https://raw.githubusercontent.com/HomeLabHD/ansible/main/.stagefreight/badges/release-updated.svg) [![size](https://raw.githubusercontent.com/HomeLabHD/ansible/main/.stagefreight/badges/release-size.svg)](https://hub.docker.com/r/hlhd/ansible/tags?name=2.20.1) [![latest-dev](https://raw.githubusercontent.com/HomeLabHD/ansible/main/.stagefreight/badges/latest-dev.svg)](https://hub.docker.com/r/hlhd/ansible/tags?name=latest-dev) ![updated](https://raw.githubusercontent.com/HomeLabHD/ansible/main/.stagefreight/badges/dev-updated.svg) [![size](https://raw.githubusercontent.com/HomeLabHD/ansible/main/.stagefreight/badges/dev-size.svg)](https://hub.docker.com/r/hlhd/ansible/tags?name=latest-dev)
 <!-- sf:image:end -->
 
-### Base Image
+### Image Contents
 
 <!-- sf:versions:start -->
-<details>
-<summary>Base image</summary>
-
 Built from `python:3.14.3-alpine3.23`.
 
 | Name | Version |
 | --- | --- |
 | python | 3.14.3 |
-
-</details>
 <!-- sf:versions:end -->
 
-### System Packages
+**System** <!-- sf:apk:start -->![bash](https://img.shields.io/badge/bash-555?style=flat) ![coreutils](https://img.shields.io/badge/coreutils-555?style=flat) ![curl](https://img.shields.io/badge/curl-555?style=flat) ![git](https://img.shields.io/badge/git-555?style=flat) ![jq](https://img.shields.io/badge/jq-555?style=flat) ![openssh](https://img.shields.io/badge/openssh-555?style=flat) ![openssh-keygen](https://img.shields.io/badge/openssh--keygen-555?style=flat) ![rage](https://img.shields.io/badge/rage-555?style=flat) ![rsync](https://img.shields.io/badge/rsync-555?style=flat)<!-- sf:apk:end -->
 
-<!-- sf:apk:start -->
-![bash](https://img.shields.io/badge/bash-555?style=flat) ![coreutils](https://img.shields.io/badge/coreutils-555?style=flat) ![curl](https://img.shields.io/badge/curl-555?style=flat) ![git](https://img.shields.io/badge/git-555?style=flat) ![jq](https://img.shields.io/badge/jq-555?style=flat) ![openssh](https://img.shields.io/badge/openssh-555?style=flat) ![openssh-keygen](https://img.shields.io/badge/openssh--keygen-555?style=flat) ![rage](https://img.shields.io/badge/rage-555?style=flat) ![rsync](https://img.shields.io/badge/rsync-555?style=flat)
-<!-- sf:apk:end -->
+**Python** <!-- sf:pip:start -->![ansible-core](https://img.shields.io/badge/ansible--core-2.20.4-2ea043?style=flat) ![ansible-lint](https://img.shields.io/badge/ansible--lint-26.3.0-2ea043?style=flat) ![hvac](https://img.shields.io/badge/hvac-555?style=flat) ![kubernetes](https://img.shields.io/badge/kubernetes-555?style=flat) ![pip](https://img.shields.io/badge/pip-555?style=flat) ![pywinrm](https://img.shields.io/badge/pywinrm-555?style=flat) ![requests](https://img.shields.io/badge/requests-555?style=flat)<!-- sf:pip:end -->
 
-### Python Packages
+**Collections** <!-- sf:galaxy:start -->![ansible.posix](https://img.shields.io/badge/ansible.posix-555?style=flat) ![ansible.windows](https://img.shields.io/badge/ansible.windows-555?style=flat) ![community.docker](https://img.shields.io/badge/community.docker-555?style=flat) ![community.hashi_vault](https://img.shields.io/badge/community.hashi__vault-555?style=flat) ![community.sops](https://img.shields.io/badge/community.sops-555?style=flat) ![kubernetes.core](https://img.shields.io/badge/kubernetes.core-555?style=flat)<!-- sf:galaxy:end -->
 
-<!-- sf:pip:start -->
-![ansible-core](https://img.shields.io/badge/ansible--core-2.20.4-2ea043?style=flat) ![ansible-lint](https://img.shields.io/badge/ansible--lint-26.3.0-2ea043?style=flat) ![hvac](https://img.shields.io/badge/hvac-555?style=flat) ![kubernetes](https://img.shields.io/badge/kubernetes-555?style=flat) ![pip](https://img.shields.io/badge/pip-555?style=flat) ![pywinrm](https://img.shields.io/badge/pywinrm-555?style=flat) ![requests](https://img.shields.io/badge/requests-555?style=flat)
-<!-- sf:pip:end -->
-
-### Ansible Collections
-
-<!-- sf:galaxy:start -->
-![ansible.posix](https://img.shields.io/badge/ansible.posix-555?style=flat) ![ansible.windows](https://img.shields.io/badge/ansible.windows-555?style=flat) ![community.docker](https://img.shields.io/badge/community.docker-555?style=flat) ![community.hashi_vault](https://img.shields.io/badge/community.hashi__vault-555?style=flat) ![community.sops](https://img.shields.io/badge/community.sops-555?style=flat) ![kubernetes.core](https://img.shields.io/badge/kubernetes.core-555?style=flat)
-<!-- sf:galaxy:end -->
-
-### Binary Tools
-
-<!-- sf:binaries:start -->
-![sops](https://img.shields.io/badge/sops-v3.12.1-2ea043?style=flat) ![yq](https://img.shields.io/badge/yq-v4.52.4-2ea043?style=flat)
-<!-- sf:binaries:end -->
+**Tools** <!-- sf:binaries:start -->![sops](https://img.shields.io/badge/sops-v3.12.1-2ea043?style=flat) ![yq](https://img.shields.io/badge/yq-v4.52.4-2ea043?style=flat)<!-- sf:binaries:end -->
 
 ### Documentation
 
