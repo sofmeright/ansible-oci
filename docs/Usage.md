@@ -51,11 +51,13 @@ The image expects playbooks and configuration inside `/app` by default.
 ## Included Tools
 
 <!-- sf:usage-tools:start -->
+![ansible-core](https://img.shields.io/badge/ansible--core-2.20.4-2ea043?style=flat) ![ansible-lint](https://img.shields.io/badge/ansible--lint-26.3.0-2ea043?style=flat) ![hvac](https://img.shields.io/badge/hvac-555?style=flat) ![kubernetes](https://img.shields.io/badge/kubernetes-555?style=flat) ![pip](https://img.shields.io/badge/pip-555?style=flat) ![pywinrm](https://img.shields.io/badge/pywinrm-555?style=flat) ![requests](https://img.shields.io/badge/requests-555?style=flat)
 <!-- sf:usage-tools:end -->
 
 ## Ansible Collections
 
 <!-- sf:usage-galaxy:start -->
+![ansible.posix](https://img.shields.io/badge/ansible.posix-555?style=flat) ![ansible.windows](https://img.shields.io/badge/ansible.windows-555?style=flat) ![community.docker](https://img.shields.io/badge/community.docker-555?style=flat) ![community.hashi_vault](https://img.shields.io/badge/community.hashi__vault-555?style=flat) ![community.sops](https://img.shields.io/badge/community.sops-555?style=flat) ![kubernetes.core](https://img.shields.io/badge/kubernetes.core-555?style=flat)
 <!-- sf:usage-galaxy:end -->
 
 ## SSH Key Handling
