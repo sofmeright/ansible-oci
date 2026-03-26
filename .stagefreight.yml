@@ -327,8 +327,6 @@ narrator:
           mode: replace
         section: "inventories.apk"
         renderer: badges
-        wrap: details
-        summary: "System packages (apk)"
 
       # ── Build contents: python packages (pip) ──────────────────
       - id: contents.pip
@@ -338,8 +336,6 @@ narrator:
           mode: replace
         section: "inventories.pip"
         renderer: badges
-        wrap: details
-        summary: "Python packages (pip)"
 
       # ── Build contents: ansible collections (galaxy) ───────────
       - id: contents.galaxy
@@ -349,8 +345,6 @@ narrator:
           mode: replace
         section: "inventories.galaxy"
         renderer: badges
-        wrap: details
-        summary: "Ansible collections (galaxy)"
 
       # ── Build contents: binary tools ───────────────────────────
       - id: contents.binaries
@@ -360,8 +354,6 @@ narrator:
           mode: replace
         section: "inventories.binaries"
         renderer: badges
-        wrap: details
-        summary: "Binary tools"
 
   - file: "docs/Usage.md"
     items:
@@ -373,8 +365,6 @@ narrator:
           mode: replace
         section: "inventories.pip"
         renderer: badges
-        wrap: details
-        summary: "Python packages (pip)"
 
       # ── Collections: galaxy ─────────────────────────────────────
       - id: usage.galaxy
@@ -384,8 +374,6 @@ narrator:
           mode: replace
         section: "inventories.galaxy"
         renderer: badges
-        wrap: details
-        summary: "Ansible collections (galaxy)"
 
 manifest:
   enabled: true
