@@ -363,6 +363,26 @@ narrator:
         wrap: details
         summary: "Binary tools"
 
+  - file: "docs/Usage.md"
+    items:
+      # ── Tools: pip + binaries combined ──────────────────────────
+      - id: usage.tools
+        kind: build-contents
+        placement:
+          between: ["<!-- sf:usage-tools:start -->", "<!-- sf:usage-tools:end -->"]
+          mode: replace
+        section: "inventories.pip"
+        renderer: badges
+
+      # ── Collections: galaxy ─────────────────────────────────────
+      - id: usage.galaxy
+        kind: build-contents
+        placement:
+          between: ["<!-- sf:usage-galaxy:start -->", "<!-- sf:usage-galaxy:end -->"]
+          mode: replace
+        section: "inventories.galaxy"
+        renderer: badges
+
 manifest:
   enabled: true
   mode: workspace

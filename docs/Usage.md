@@ -50,25 +50,13 @@ The image expects playbooks and configuration inside `/app` by default.
 
 ## Included Tools
 
-| Tool | Version | Purpose |
-|------|---------|---------|
-| ansible-core | 2.20.3 | Playbook execution |
-| ansible-lint | 26.3.0 | Playbook validation |
-| yq | 4.52.4 | YAML processing |
-| sops | 3.12.1 | Encrypted secret management |
-| rage | (system) | Age encryption backend |
-| pywinrm | (latest) | Windows WinRM management |
-| kubernetes | (latest) | Kubernetes API client |
+<!-- sf:usage-tools:start -->
+<!-- sf:usage-tools:end -->
 
 ## Ansible Collections
 
-Pre-installed collections:
-
-- `ansible.posix`
-- `ansible.windows`
-- `community.docker`
-- `community.sops`
-- `kubernetes.core`
+<!-- sf:usage-galaxy:start -->
+<!-- sf:usage-galaxy:end -->
 
 ## SSH Key Handling
 
