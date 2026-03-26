@@ -1,0 +1,8 @@
+.git
+.stagefreight
+.gitlab-ci.yml
+.dockerignore
+.gitignore
+README.md
+LICENSE
+docs/
