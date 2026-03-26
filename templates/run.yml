@@ -84,7 +84,7 @@ spec:
       echo "$SOPS_AGE_KEY_B64" | base64 -d > /run/secrets/age_key
       export SOPS_AGE_KEY_FILE=/run/secrets/age_key
       chmod 400 "$SOPS_AGE_KEY_FILE"
-      
+
       # Also export the key directly as backup
       export SOPS_AGE_KEY=$(cat /run/secrets/age_key)
     fi

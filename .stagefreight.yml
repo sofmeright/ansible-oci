@@ -65,6 +65,13 @@ targets:
     description: "Lightweight Alpine-based Ansible image with Windows support and community collections"
     link_base: "https://github.com/{var:github_org}/{var:repo}/blob/main"
 
+  # ── GitLab component catalog ─────────────────────────────────────
+  - id: gitlab-catalog
+    kind: gitlab-component
+    when: { branches: [main], events: [push] }
+    spec_files: ["templates/run.yml", "templates/test.yml"]
+    catalog: true
+
   # ── Primary release ─────────────────────────────────────────────
   - id: primary-release
     kind: release
