@@ -1,111 +1,125 @@
 ---
-
 spec:
   inputs:
-    # input_section_name- Gitlab Job Config
-    # input_section_desc- Inputs that configure GitLab Job behavior
+    # input_section_name- Job Configuration
+    # input_section_desc- Inputs that configure GitLab job behavior
     job:
-      description: 'The intended name of the CI job spawned by this component.'
+      description: 'Job name for the CI pipeline.'
       default: run-ansible
+    stage:
+      description: 'CI stage this job runs in.'
+      default: ansible
+    image:
+      description: 'Docker image to use for execution.'
+      default: docker.io/hlhd/ansible:latest
     artifacts:
-      description: 'An array of paths to preserve as CI/CD artifacts.'
+      description: 'Paths to preserve as CI/CD artifacts.'
       type: array
       default: []
-    gitlab_branch:
-      description: 'Target Git branch for commits.'
-      default: 'main'
+    rules:
+      description: 'When to run this job (GitLab rules array).'
+      type: array
+      default:
+        - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+
+    # input_section_name- Ansible Configuration
+    # input_section_desc- Settings for Ansible playbook execution
+    ansible_playbook:
+      description: 'Path to the playbook file to execute.'
+    ansible_inventory:
+      description: 'Path to the inventory file.'
+      default: ansible/inventory
+    ansible_host_key_checking:
+      description: 'Enable SSH host key checking. Disable only in trusted environments.'
+      default: 'false'
+    ansible_extra_vars:
+      description: 'Extra variables to pass to ansible-playbook (-e key=value, space-separated).'
+      default: ''
+    working_dir:
+      description: 'Working directory for ansible execution.'
+      default: ''
+
+    # input_section_name- Authentication
+    # input_section_desc- Credentials for SSH, SOPS, GitLab API, and Windows targets
+    ssh_private_key:
+      description: 'CI/CD file variable containing the SSH private key.'
+      default: ''
+    sops_age_key_file:
+      description: 'CI/CD file variable containing the Age key for SOPS decryption.'
+      default: ''
     gitlab_token:
       description: 'Token for authenticating GitLab API calls.'
       default: ''
-    stage:
-      description: 'The intended name of the CI stage this job will run in.'
-      default: ansible
-    # input_section_name- Ansible Config
-    # input_section_desc- Configuration settings for Ansible execution
-    ansible_host_key_checking:
-      description: 'Disables SSH host key checking. (Discouraged in untrusted environments.)'
-      default: false
-    ansible_inventory:
-      description: 'Path to an inventory file with hosts/infra to target.'
-      default: ansible/inventory
-    ansible_playbook:
-      description: 'Path to a playbook file.'
-    sops_age_key_b64:
-      description: 'A Base64-encoded Age key for SOPS.'
-      default: ''
-    sops_age_key_path:
-      description: 'Path to an Age key stored as a file for SOPS.'
-      default: ''
-    ssh_private_key:
-      description: 'The SSH private key used for SSH key-based auth.'
-      default: ''
+    gitlab_branch:
+      description: 'Target Git branch for commits via GitLab API.'
+      default: $CI_DEFAULT_BRANCH
     windows_password:
-      description: 'The password used to connect to non-domain managed Windows hosts.'
-      default: ''
-    working_dir:
-      description: 'The base path to assign during ansible execution.'
+      description: 'Password for WinRM connections to Windows hosts.'
       default: ''
 
 ---
 
 '$[[ inputs.job ]]':
+  stage: '$[[ inputs.stage ]]'
+  image:
+    name: '$[[ inputs.image ]]'
+    entrypoint: [""]
   artifacts:
     when: always
     paths: $[[ inputs.artifacts ]]
-  image:
-    name: docker.io/hlhd/ansible:latest
-    entrypoint: [""]
-  rules:
-    - if: '$CI_COMMIT_REF_NAME == "main"'
-      #changes:
-        #- '$[[ inputs.root_dir ]]/$[[ inputs.project_file ]]'
-  stage: '$[[ inputs.stage ]]'
+  rules: $[[ inputs.rules ]]
   variables:
-    ANSIBLE_HOST_KEY_CHECKING: $[[ inputs.ansible_host_key_checking ]]
-    ANSIBLE_INVENTORY: $[[ inputs.ansible_inventory ]]
-    ANSIBLE_PLAYBOOK: $[[ inputs.ansible_playbook ]]
-    GITLAB_BRANCH: $[[ inputs.gitlab_branch ]]
-    GITLAB_TOKEN: $[[ inputs.gitlab_token ]]
-    SOPS_AGE_KEY_FILE: $[[ inputs.sops_age_key_path ]]
-    SSH_PRIVATE_KEY: $[[ inputs.ssh_private_key ]]
-    WINDOWS_PASSWORD: $[[ inputs.windows_password ]]
-    WORKING_DIR: $[[ inputs.working_dir ]]
+    ANSIBLE_HOST_KEY_CHECKING: '$[[ inputs.ansible_host_key_checking ]]'
 
-  before_script: |
-    eval "$(ssh-agent -s)"
-    mkdir -p ~/.ssh
-    cat "$SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa
-    chmod 400 ~/.ssh/id_rsa
-    ssh-add ~/.ssh/id_rsa
+  before_script:
+    - |
+      # SSH agent setup (only when key is provided)
+      if [ -n "$SSH_PRIVATE_KEY" ] && [ -f "$SSH_PRIVATE_KEY" ]; then
+        eval "$(ssh-agent -s)" > /dev/null
+        mkdir -p ~/.ssh && chmod 700 ~/.ssh
+        cp "$SSH_PRIVATE_KEY" ~/.ssh/id_rsa
+        chmod 400 ~/.ssh/id_rsa
+        ssh-add ~/.ssh/id_rsa 2>/dev/null
+      fi
 
-    # Optional: decode Age key from env if present
-    if [ -n "$SOPS_AGE_KEY_B64" ]; then
-      mkdir -p /run/secrets
-      echo "$SOPS_AGE_KEY_B64" | base64 -d > /run/secrets/age_key
-      export SOPS_AGE_KEY_FILE=/run/secrets/age_key
-      chmod 400 "$SOPS_AGE_KEY_FILE"
+      # SOPS Age key setup (only when key file is provided)
+      if [ -n "$SOPS_AGE_KEY_FILE" ] && [ -f "$SOPS_AGE_KEY_FILE" ]; then
+        export SOPS_AGE_KEY_FILE
+      fi
 
-      # Also export the key directly as backup
-      export SOPS_AGE_KEY=$(cat /run/secrets/age_key)
-    fi
+  script:
+    - |
+      EXTRA_ARGS=""
 
-    # Verify the setup
-    echo "SOPS_AGE_KEY_FILE: $SOPS_AGE_KEY_FILE"
-    ls -la /run/secrets/age_key 2>/dev/null || echo "Age key file not found"
-  script: |
-    echo "---------------------------------------------------------------------------"
-    echo "Ansible GitOps Component 🅰️ - Playbook - Now launching the specified Ansible playbook"
-    echo "---------------------------------------------------------------------------"
-    ansible-playbook -i "${ANSIBLE_INVENTORY}" "${ANSIBLE_PLAYBOOK}" \
-      -e "ansible_host_key_checking=${ANSIBLE_HOST_KEY_CHECKING}" \
-      -e "ci_commit_ref_name=${CI_COMMIT_REF_NAME}" \
-      -e "ci_commit_tag=${CI_COMMIT_TAG}" \
-      -e "ci_project_dir=${CI_PROJECT_DIR}" \
-      -e "gitlab_api_url=${CI_API_V4_URL}" \
-      -e "gitlab_branch=${GITLAB_BRANCH}" \
-      -e "gitlab_project_id=${CI_PROJECT_ID}" \
-      -e "gitlab_token=${GITLAB_TOKEN}" \
-      -e "windows_password=${WINDOWS_PASSWORD}"
-    echo "---------------------------------------------------------------------------"
-    echo " Ansible GitOps Component 🅰️ - exit - Finished executing the specified Ansible playbook ✅"
-    echo "---------------------------------------------------------------------------"
+      # Working directory
+      if [ -n "$[[ inputs.working_dir ]]" ]; then
+        cd "$[[ inputs.working_dir ]]"
+      fi
+
+      # GitLab context variables (available to playbooks via -e)
+      EXTRA_ARGS="$EXTRA_ARGS -e ci_commit_ref_name=${CI_COMMIT_REF_NAME}"
+      EXTRA_ARGS="$EXTRA_ARGS -e ci_commit_tag=${CI_COMMIT_TAG:-}"
+      EXTRA_ARGS="$EXTRA_ARGS -e ci_project_dir=${CI_PROJECT_DIR}"
+      EXTRA_ARGS="$EXTRA_ARGS -e gitlab_api_url=${CI_API_V4_URL}"
+      EXTRA_ARGS="$EXTRA_ARGS -e gitlab_branch=$[[ inputs.gitlab_branch ]]"
+      EXTRA_ARGS="$EXTRA_ARGS -e gitlab_project_id=${CI_PROJECT_ID}"
+
+      if [ -n "$[[ inputs.gitlab_token ]]" ]; then
+        EXTRA_ARGS="$EXTRA_ARGS -e gitlab_token=$[[ inputs.gitlab_token ]]"
+      fi
+
+      if [ -n "$[[ inputs.windows_password ]]" ]; then
+        EXTRA_ARGS="$EXTRA_ARGS -e ansible_windows_password=$[[ inputs.windows_password ]]"
+      fi
+
+      # User-provided extra vars
+      if [ -n "$[[ inputs.ansible_extra_vars ]]" ]; then
+        for var in $[[ inputs.ansible_extra_vars ]]; do
+          EXTRA_ARGS="$EXTRA_ARGS -e $var"
+        done
+      fi
+
+      ansible-playbook \
+        -i "$[[ inputs.ansible_inventory ]]" \
+        "$[[ inputs.ansible_playbook ]]" \
+        $EXTRA_ARGS
