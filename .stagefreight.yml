@@ -15,8 +15,7 @@ sources:
 
 policies:
   git_tags:
-    stable: "^v?\\d+\\.\\d+\\.\\d+$"
-    prerelease: "^v?\\d+\\.\\d+\\.\\d+-.+"
+    stable: "^\\d+\\.\\d+\\.\\d+-v\\d+$"
   branches:
     main: "^main$"
 
@@ -37,18 +36,6 @@ targets:
       - "{version}"
       - "latest"
     when: { git_tags: [stable], events: [tag] }
-    credentials: DOCKER
-
-  # ── Docker Hub: pre-releases ────────────────────────────────────
-  - id: dockerhub-prerelease
-    kind: registry
-    build: ansible
-    url: docker.io
-    provider: docker
-    path: "{var:org}/{var:repo}"
-    tags:
-      - "{version}"
-    when: { git_tags: [prerelease], events: [tag] }
     credentials: DOCKER
 
   # ── Docker Hub: dev builds on every commit ──────────────────────
@@ -81,7 +68,7 @@ targets:
   # ── Primary release ─────────────────────────────────────────────
   - id: primary-release
     kind: release
-    aliases: ["{version}", "latest"]
+    aliases: ["latest"]
     when: { git_tags: [stable], events: [tag] }
 
   # ── GitHub release sync ──────────────────────────────────────────
@@ -190,7 +177,7 @@ narrator:
           mode: replace
           inline: true
         text: release
-        value: "v{base}"
+        value: "{base}"
         color: "#74ecbe"
         font: dejavu-sans
         font_size: 11
@@ -262,7 +249,7 @@ narrator:
           between: ["<!-- sf:image:start -->", "<!-- sf:image:end -->"]
           mode: replace
         text: latest
-        value: "v{base}"
+        value: "{base}"
         color: "#74ecbe"
         output: ".stagefreight/badges/latest.svg"
         link: "https://hub.docker.com/r/{var:org}/{var:repo}/tags?name=latest"
@@ -273,7 +260,7 @@ narrator:
           between: ["<!-- sf:image:start -->", "<!-- sf:image:end -->"]
           mode: replace
         text: updated
-        value: "{docker.tag.v{base}.updated}"
+        value: "{docker.tag.{base}.updated}"
         color: "#236144"
         output: ".stagefreight/badges/release-updated.svg"
 
@@ -283,10 +270,10 @@ narrator:
           between: ["<!-- sf:image:start -->", "<!-- sf:image:end -->"]
           mode: replace
         text: size
-        value: "{docker.tag.v{base}.size}"
+        value: "{docker.tag.{base}.size}"
         color: "#555"
         output: ".stagefreight/badges/release-size.svg"
-        link: "https://hub.docker.com/r/{var:org}/{var:repo}/tags?name=v{base}"
+        link: "https://hub.docker.com/r/{var:org}/{var:repo}/tags?name={base}"
 
       # Dev badges (same row)
       - id: image.dev-latest
@@ -328,8 +315,7 @@ narrator:
           between: ["<!-- sf:versions:start -->", "<!-- sf:versions:end -->"]
           mode: replace
         section: "inventories.versions"
-        renderer: table
-        columns: [name, version, source_ref]
+        renderer: versions
 
       # ── Build contents: system packages (apk) ─────────────────
       - id: contents.apk
